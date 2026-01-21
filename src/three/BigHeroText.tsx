@@ -48,12 +48,12 @@ export default function BigHeroText() {
     <Center>
       <group ref={groupRef} position={[-1.4, 0, 0]}>
         {/* layered additive glow meshes (slightly bigger scales) */}
-        {[0.03, 0.07, 0.12].map((s, i) => (
+        {[0.03, -0.04].map((s, i) => (
           <mesh key={i} geometry={geometry} scale={[1 + s, 1 + s, 1 + s]}>
             <meshBasicMaterial
-              color="#ff7a7a"
+              color="#fd8b8b"
               transparent
-              opacity={0.14 - i * 0.035}
+              opacity={0.14 - i * 0.65}
               blending={THREE.AdditiveBlending}
               depthWrite={false}
             />
@@ -65,7 +65,7 @@ export default function BigHeroText() {
           <meshStandardMaterial
             color="#ff2b2b"
             emissive="#ff2b2b"
-            emissiveIntensity={1.0}
+            emissiveIntensity={0.75}
             roughness={0.08}
             metalness={0.9}
           />

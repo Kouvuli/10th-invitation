@@ -19,6 +19,11 @@ function Hero3D(): JSX.Element {
 }
 
 export default function HeroSection(): JSX.Element {
+  const handleClick = () => {
+    const next = document.querySelector("#timeline");
+    next?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <section className="h-screen grid grid-cols-1 md:grid-cols-2">
       <div className="flex items-center justify-center p-10">
@@ -67,9 +72,17 @@ export default function HeroSection(): JSX.Element {
             </motion.svg>
           </motion.div>
           <p className="text-slate-700 leading-relaxed">
-            Năm nay đánh dấu cột mốc <b>1 thập kỷ</b> chúng ta đồng hành cùng
-            nhau (2016 – 2026). Giữa guồng quay cuộc sống, giữ được một tập thể
-            gắn kết suốt 10 năm là điều vô cùng đáng trân trọng.
+            Năm nay đánh dấu cột mốc{" "}
+            <motion.a
+              onClick={handleClick}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="cursor-pointer inline-block font-semibold text-rose-600 decoration-rose-300/70 transition hover:decoration-rose-500"
+            >
+              1 thập kỷ
+            </motion.a>{" "}
+            chúng ta đồng hành cùng nhau. Giữa guồng quay cuộc sống, giữ được
+            một tập thể gắn kết suốt 10 năm là điều vô cùng đáng trân trọng.
           </p>
         </motion.div>
       </div>

@@ -4,7 +4,7 @@ import HeroSection from "./components/HeroSection";
 import TimelineSection from "./components/TimelineSection";
 import EventSection from "./components/EventSection";
 import ConfirmSection from "./components/ConfirmSection";
-import Footer from "./components/Footer";
+import FutureSection from "./components/FutureSection";
 
 export default function App() {
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -111,7 +111,7 @@ export default function App() {
         ref={containerRef}
         className="h-screen overflow-y-auto snap-y snap-mandatory scroll-smooth relative"
       >
-        <section className="snap-start h-screen">
+        <section id="hero" className="snap-start h-screen">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -122,7 +122,7 @@ export default function App() {
           </motion.div>
         </section>
 
-        <section className="snap-start h-screen">
+        <section id="timeline" className="snap-start h-screen">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -132,8 +132,11 @@ export default function App() {
             <TimelineSection />
           </motion.div>
         </section>
+        <section id="gift" className="snap-start h-screen">
+          <FutureSection />
+        </section>
 
-        <section className="snap-start h-screen">
+        <section id="event" className="snap-start h-screen">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -144,7 +147,7 @@ export default function App() {
           </motion.div>
         </section>
 
-        <section className="snap-start h-screen">
+        <section id="confirm" className="snap-start h-screen">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -152,7 +155,6 @@ export default function App() {
             transition={{ duration: 0.8 }}
           >
             <ConfirmSection />
-            <Footer />
           </motion.div>
         </section>
 

@@ -6,7 +6,6 @@ type Item = {
   id: number;
   title: string;
   desc: string;
-  color: string;
 };
 
 export default function TimelineSection(): JSX.Element {
@@ -16,77 +15,114 @@ export default function TimelineSection(): JSX.Element {
     id: i + 1,
     title: `Checkpoint ${i + 1}`,
     desc: `Short description for checkpoint ${i + 1}.`,
-    color: [
-      "#7c3aed",
-      "#06b6d4",
-      "#84cc16",
-      "#f59e0b",
-      "#fb7185",
-      "#f472b6",
-      "#a78bfa",
-      "#60a5fa",
-      "#fb923c",
-      "#ef4444",
-    ][i % 10],
   }));
+
+  const topItems = items.slice(0, 5);
+  const bottomItems = items.slice(5, 10);
 
   const [open, setOpen] = useState<number | null>(null);
 
   return (
-    <section className="h-full flex flex-col items-center justify-center p-8">
-      <div className="max-w-7xl w-full">
-        <h2 className="text-3xl md:text-4xl font-semibold mb-8 text-center text-slate-900">
-          Timeline
-        </h2>
+    <section
+      id="timeline"
+      className="relative px-14 md:px-28 flex flex-col items-center"
+    >
+      <motion.div
+        initial={{ opacity: 0, y: 18 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.9 }}
+        className="mb-10"
+      >
+        <motion.h1
+          className="text-6xl md:text-8xl font-extrabold tracking-widest text-slate-900 leading-tight"
+          whileHover={{ scale: 1.02 }}
+        >
+          <span className="block text-3xl text-center md:text-5xl text-slate-800">
+            1 Thập Kỷ
+          </span>
+        </motion.h1>
 
-        <div className="relative">
-          <div className="overflow-x-auto no-scrollbar py-6 relative">
-            {/* horizontal line centered vertically across the thumbnail row */}
-            <div className="absolute left-6 right-6 bottom-15 transform -translate-y-1/2 h-1 bg-slate-300 z-0 rounded-full" />
+        <motion.svg
+          viewBox="0 0 200 20"
+          className="w-56 h-10 mt-2 text-rose-400"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.2 }}
+        >
+          <motion.path
+            d="M5 10 C40 0, 80 20, 120 10 C160 0, 195 20, 195 10"
+            fill="transparent"
+            stroke="#fb7185"
+            strokeWidth={1.8}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{ duration: 1.2, ease: "easeInOut" }}
+          />
+        </motion.svg>
+      </motion.div>
 
-            <div className="min-w-full flex items-start gap-8 px-8 md:px-12">
-              {items.map((it) => (
-                <div
-                  key={it.id}
-                  className="w-56 md:w-72 flex flex-col items-center relative"
-                >
-                  <div className="flex flex-col items-center">
-                    <div
-                      className="w-40 h-24 md:w-56 md:h-36 overflow-hidden rounded-lg shadow-md cursor-pointer mb-2"
-                      onClick={() => setOpen(it.id)}
-                    >
-                      <img
-                        src={`/images/checkpoint-${it.id}.jpg`}
-                        alt={`Checkpoint ${it.id}`}
-                        className="w-full h-full object-cover"
-                        onError={(e) => {
-                          const el = e.target as HTMLImageElement;
-                          el.style.opacity = "0.5";
-                        }}
-                      />
-                    </div>
-
-                    {/* dot on the line */}
-                    <div className="relative z-10">
-                      <button
-                        onClick={() => setOpen(it.id)}
-                        className="w-4 h-4 rounded-full bg-black"
-                        aria-label={`Open checkpoint ${it.id}`}
-                      />
-                    </div>
-
-                    <div className="mt-3 text-sm text-rose-600 font-semibold">
-                      {startYear + (it.id - 1)}
-                    </div>
-                  </div>
-                </div>
-              ))}
+      <div className="w-full max-w-7xl relative">
+        {/* ===== TOP ROW ===== */}
+        <div className="grid grid-cols-5 gap-3 mb-3">
+          {topItems.map((it) => (
+            <div key={it.id} className="flex flex-col items-center">
+              <motion.div
+                className="w-28 h-16 md:w-44 md:h-28 rounded-lg overflow-hidden shadow-md cursor-pointer"
+                onClick={() => setOpen(it.id)}
+                whileHover={{ scale: 1.05 }}
+              >
+                <img
+                  src={`/images/checkpoint-${it.id}.jpg`}
+                  alt={it.title}
+                  className="w-full h-full object-cover"
+                />
+              </motion.div>
             </div>
+          ))}
+        </div>
+
+        {/* ===== TIMELINE LINE ===== */}
+        <div className="relative h-20">
+          <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-1 bg-slate-300 rounded-full" />
+
+          <div className="grid grid-cols-5 absolute inset-0">
+            {topItems.map((it) => (
+              <div key={it.id} className="flex flex-col items-center">
+                <button
+                  onClick={() => setOpen(it.id)}
+                  className="w-3 h-3 rounded-full bg-rose-600 z-10"
+                />
+                <div className="mt-2 text-sm font-medium text-rose-600">
+                  {startYear + it.id - 1}
+                </div>
+              </div>
+            ))}
           </div>
+        </div>
+
+        {/* ===== BOTTOM ROW ===== */}
+        <div className="grid grid-cols-5 gap-3 mt-12">
+          {bottomItems.map((it) => (
+            <div key={it.id} className="flex flex-col items-center">
+              <motion.div
+                className="w-28 h-16 md:w-44 md:h-28 rounded-lg overflow-hidden shadow-md cursor-pointer"
+                onClick={() => setOpen(it.id)}
+                whileHover={{ scale: 1.05 }}
+              >
+                <img
+                  src={`/images/checkpoint-${it.id}.jpg`}
+                  alt={it.title}
+                  className="w-full h-full object-cover"
+                />
+              </motion.div>
+            </div>
+          ))}
         </div>
       </div>
 
-      {/* Modal for preview (optional) */}
+      {/* ===== MODAL PREVIEW ===== */}
       {open !== null && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/60"
@@ -98,30 +134,18 @@ export default function TimelineSection(): JSX.Element {
             className="max-w-2xl w-full mx-4"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="relative bg-transparent rounded-lg overflow-hidden shadow-xl">
+            <div className="relative rounded-xl overflow-hidden shadow-2xl bg-white">
               <button
                 onClick={() => setOpen(null)}
-                aria-label="Close"
-                className="absolute top-3 right-3 z-50 bg-white/90 hover:bg-white rounded-full p-2 shadow"
+                className="absolute top-3 right-3 z-50 bg-white rounded-full p-2 shadow cursor-pointer"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-4 w-4 text-slate-800"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                    clipRule="evenodd"
-                  />
-                </svg>
+                ✕
               </button>
 
               <img
                 src={`/images/checkpoint-${open}.jpg`}
                 alt={`Checkpoint ${open}`}
-                className="w-full h-auto max-h-[80vh] object-contain bg-white"
+                className="w-full max-h-[80vh] object-contain"
               />
             </div>
           </motion.div>
