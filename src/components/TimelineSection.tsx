@@ -135,7 +135,7 @@ export default function TimelineSection(): JSX.Element {
                   whileHover={{ scale: 1.05 }}
                 >
                   <img
-                    src={`/images/checkpoint-${it.id}.jpg`}
+                    src={`${import.meta.env.BASE_URL}/images/checkpoint-${it.id}.jpg`}
                     alt={it.title}
                     className="w-full h-full object-cover"
                   />
@@ -202,7 +202,7 @@ export default function TimelineSection(): JSX.Element {
                   whileHover={{ scale: 1.05 }}
                 >
                   <img
-                    src={`/images/checkpoint-${it.id}.jpg`}
+                    src={`${import.meta.env.BASE_URL}/images/checkpoint-${it.id}.jpg`}
                     alt={it.title}
                     className="w-full h-full object-cover"
                   />
@@ -268,7 +268,7 @@ export default function TimelineSection(): JSX.Element {
               </button>
 
               <img
-                src={`/images/checkpoint-${open}.jpg`}
+                src={`${import.meta.env.BASE_URL}/images/checkpoint-${open}.jpg`}
                 alt={`Checkpoint ${open}`}
                 className="w-full max-h-[80vh] object-contain"
               />
