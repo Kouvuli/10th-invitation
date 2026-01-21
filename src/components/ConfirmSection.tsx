@@ -3,7 +3,8 @@ import Footer from "./Footer";
 
 export default function ConfirmSection() {
   const googleFormUrl =
-    import.meta.env.VITE_GOOGLE_FORM_URL || "https://forms.gle/your-form-link";
+    import.meta.env.VITE_GOOGLE_FORM_URL ||
+    "https://forms.gle/qb4eG3oRvGVpxBEdA";
 
   return (
     <section className="relative flex justify-center items-center min-h-screen">
