@@ -3,7 +3,7 @@ import { JSX } from "react";
 
 export default function EventSection(): JSX.Element {
   return (
-    <section className="max-w-5xl mx-auto px-6 py-24 space-y-16">
+    <section className="max-w-5xl px-6 md:px-28 flex flex-col justify-center gap-10 min-h-screen">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -31,7 +31,7 @@ export default function EventSection(): JSX.Element {
         transition={{ duration: 0.8, delay: 0.2 }}
       >
         <h2 className="text-3xl font-semibold mb-4 text-slate-900">
-          🌲 Trip Đà Lạt Truyền Thống
+          🌲 Trip Đà Lạt
         </h2>
         <ul className="text-slate-700 space-y-2">
           <li>
