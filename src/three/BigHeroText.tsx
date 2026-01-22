@@ -8,10 +8,7 @@ export default function BigHeroText() {
   const groupRef = useRef<THREE.Group>(null!);
   const shadowParams = useRef({ y: -0.95, width: 2.6, height: 1.2 });
 
-  const font = useLoader(
-    FontLoader,
-    `${import.meta.env.BASE_URL}/fonts/helvetiker_regular.typeface.json`,
-  );
+  const font = useLoader(FontLoader, `/fonts/helvetiker_regular.typeface.json`);
 
   const geometry = useMemo(() => {
     return new TextGeometry("10th", {
