@@ -3,7 +3,7 @@ import { JSX } from "react";
 
 export default function EventSection(): JSX.Element {
   return (
-    <section className="max-w-5xl px-6 md:px-28 flex flex-col justify-center gap-10 min-h-screen">
+    <section className="max-w-5xl px-6 md:px-28 flex flex-col justify-center gap-20 min-h-screen">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
