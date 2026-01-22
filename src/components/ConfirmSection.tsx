@@ -85,7 +85,7 @@ export default function ConfirmSection() {
 
         <p className="mt-8 text-sm text-slate-600">
           ⏰ Ngày chốt danh sách:{" "}
-          <span className=" text-slate-700 font-bold">Chủ Nhật 25/01</span>
+          <span className=" text-slate-700 font-bold">Chủ Nhật 01/02</span>
         </p>
         <Footer />
       </motion.div>
