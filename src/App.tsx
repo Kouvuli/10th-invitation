@@ -1,10 +1,11 @@
-import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 import HeroSection from "./components/HeroSection";
 import TimelineSection from "./components/TimelineSection";
 import EventSection from "./components/EventSection";
 import ConfirmSection from "./components/ConfirmSection";
 import FutureSection from "./components/FutureSection";
+import MainLayout from "./layout/MainLayout";
 
 export default function App() {
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -26,6 +27,7 @@ export default function App() {
         const top = el.scrollTop;
         let nearest = 0;
         let min = Infinity;
+
         sections.forEach((s, i) => {
           const offset = Math.abs(s.offsetTop - top);
           if (offset < min) {
@@ -33,6 +35,7 @@ export default function App() {
             nearest = i;
           }
         });
+
         setActive(nearest);
         activeRef.current = nearest;
         ticking = false;
@@ -40,73 +43,11 @@ export default function App() {
     };
 
     el.addEventListener("scroll", onScroll, { passive: true });
-
-    const onKey = (e: KeyboardEvent) => {
-      // don't intercept typing in form controls
-      const target = document.activeElement;
-      if (
-        target &&
-        (target.tagName === "INPUT" ||
-          target.tagName === "TEXTAREA" ||
-          target.tagName === "SELECT" ||
-          (target as HTMLElement).isContentEditable)
-      ) {
-        return;
-      }
-
-      // compute current index at keypress time
-      const sections = Array.from(
-        el.querySelectorAll("section"),
-      ) as HTMLElement[];
-      if (sections.length === 0) return;
-      const top = el.scrollTop;
-      let nearest = 0;
-      let min = Infinity;
-      sections.forEach((s, i) => {
-        const offset = Math.abs(s.offsetTop - top);
-        if (offset < min) {
-          min = offset;
-          nearest = i;
-        }
-      });
-
-      if (e.key === "ArrowDown" || e.key === "PageDown") {
-        e.preventDefault();
-        scrollToIndex(Math.min(nearest + 1, sections.length - 1));
-      } else if (e.key === "ArrowUp" || e.key === "PageUp") {
-        e.preventDefault();
-        scrollToIndex(Math.max(nearest - 1, 0));
-      } else if (e.key === "Home") {
-        e.preventDefault();
-        scrollToIndex(0);
-      } else if (e.key === "End") {
-        e.preventDefault();
-        scrollToIndex(sections.length - 1);
-      }
-    };
-
-    window.addEventListener("keydown", onKey);
-
-    return () => {
-      el.removeEventListener("scroll", onScroll);
-      window.removeEventListener("keydown", onKey);
-    };
+    return () => el.removeEventListener("scroll", onScroll);
   }, []);
 
-  function scrollToIndex(i: number) {
-    const el = containerRef.current;
-    if (!el) return;
-    const sections = Array.from(
-      el.querySelectorAll("section"),
-    ) as HTMLElement[];
-    const idx = Math.max(0, Math.min(i, sections.length - 1));
-    el.scrollTo({ top: sections[idx].offsetTop, behavior: "smooth" });
-    setActive(idx);
-    activeRef.current = idx;
-  }
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-100 via-stone-200 to-amber-100 text-slate-800">
+    <MainLayout>
       <div
         ref={containerRef}
         className="h-screen overflow-y-auto snap-y snap-mandatory scroll-smooth relative"
@@ -123,43 +64,21 @@ export default function App() {
         </section>
 
         <section id="timeline" className="snap-start h-screen">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            <TimelineSection />
-          </motion.div>
+          <TimelineSection />
         </section>
+
         <section id="gift" className="snap-start h-screen">
           <FutureSection />
         </section>
 
         <section id="event" className="snap-start h-screen">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            <EventSection />
-          </motion.div>
+          <EventSection />
         </section>
 
         <section id="confirm" className="snap-start h-screen">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            <ConfirmSection />
-          </motion.div>
+          <ConfirmSection />
         </section>
-
-        {/* dots navigation removed per request */}
       </div>
-    </div>
+    </MainLayout>
   );
 }

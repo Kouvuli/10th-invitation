@@ -63,8 +63,8 @@ export default function BigHeroText() {
         {/* main metallic text */}
         <mesh geometry={geometry} castShadow receiveShadow>
           <meshStandardMaterial
-            color="#ff2b2b"
-            emissive="#ff2b2b"
+            color="#fb4646"
+            emissive="#fb4646"
             emissiveIntensity={0.75}
             roughness={0.08}
             metalness={0.9}

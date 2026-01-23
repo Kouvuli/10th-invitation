@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 
+/* ================= SPARKLES ================= */
+
 function Sparkles() {
   const sparkles = Array.from({ length: 10 });
 
@@ -13,12 +15,7 @@ function Sparkles() {
         return (
           <motion.span
             key={i}
-            initial={{
-              opacity: 0,
-              x: 0,
-              y: 0,
-              scale: 0.6,
-            }}
+            initial={{ opacity: 0, x: 0, y: 0, scale: 0.6 }}
             animate={{
               opacity: [0, 1, 0],
               x: Math.cos(angle) * distance,
@@ -31,9 +28,8 @@ function Sparkles() {
             }}
             className="
               absolute left-1/2 top-1/2
-              w-1.5 h-1.5
-              rounded-full
-              bg-rose-400
+              w-1.5 h-1.5 rounded-full
+              bg-accent
             "
           />
         );
@@ -42,55 +38,67 @@ function Sparkles() {
   );
 }
 
+/* ================= COMPONENT ================= */
+
 export default function FutureGateSection() {
   const [clicked, setClicked] = useState(false);
 
   const handleClick = () => {
     setClicked(true);
-    const next = document.querySelector("#event");
-    next?.scrollIntoView({ behavior: "smooth" });
+    document.querySelector("#event")?.scrollIntoView({
+      behavior: "smooth",
+    });
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center">
+    <section
+      className="
+        relative min-h-screen
+        flex items-center justify-center
+       text-text
+        transition-colors duration-500
+      "
+    >
       <motion.div
         initial={{ opacity: 0, y: 18 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.9 }}
-        className="relative text-center cursor-pointer select-none"
         onClick={handleClick}
+        className="
+          relative text-center cursor-pointer select-none
+        "
       >
         {/* Sparkles */}
         {clicked && <Sparkles />}
 
-        {/* Text */}
+        {/* Main text */}
         <motion.h2
           whileHover={{ scale: 1.01 }}
           className="
             text-3xl md:text-4xl
-            font-semibold
-            tracking-widest
-            text-slate-900
+            font-semibold tracking-widest
             leading-tight
+            text-text
           "
         >
           2026 này, chúng ta sẽ có gì?
         </motion.h2>
 
-        {/* hint */}
+        {/* Hint */}
         <motion.p
           initial={{ opacity: 0, y: 4 }}
-          animate={{
-            opacity: [1, 0, 1],
-          }}
+          animate={{ opacity: [1, 0, 1] }}
           transition={{
             repeat: Infinity,
             duration: 1.8,
             ease: "easeInOut",
             delay: 0.8,
           }}
-          className="mt-6 text-sm text-slate-500"
+          className="
+            mt-6 text-sm
+            text-muted
+          "
         >
           Chạm để tiếp tục
         </motion.p>

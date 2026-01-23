@@ -7,7 +7,12 @@ export default function ConfirmSection() {
     "https://forms.gle/qb4eG3oRvGVpxBEdA";
 
   return (
-    <section className="relative flex justify-center items-center min-h-screen">
+    <section
+      className="
+      relative flex justify-center items-center min-h-screen
+      text-text
+    "
+    >
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -16,8 +21,7 @@ export default function ConfirmSection() {
         className="
           max-w-xl w-full mx-6
           rounded-2xl
-          border border-white/10
-          bg-white/5 backdrop-blur-md
+          backdrop-blur-md
           text-center
           px-10 py-14
         "
@@ -29,17 +33,25 @@ export default function ConfirmSection() {
           className="mb-10 flex justify-center items-center flex-col"
         >
           <motion.h1
-            className="text-6xl md:text-8xl font-extrabold tracking-widest text-slate-900 leading-tight"
+            className="
+              text-6xl md:text-8xl font-extrabold tracking-widest
+              leading-tight
+            "
             whileHover={{ scale: 1.02 }}
           >
-            <span className="block text-3xl text-center md:text-5xl text-slate-800">
+            <span
+              className="
+                block text-3xl md:text-5xl
+                text-text
+              "
+            >
               Xác nhận tham gia
             </span>
           </motion.h1>
 
           <motion.svg
             viewBox="0 0 200 20"
-            className="w-72 h-10 mt-2 text-rose-400"
+            className="md:w-72 md:h-10 w-52 h-8 mt-2 text-accent"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
@@ -47,7 +59,7 @@ export default function ConfirmSection() {
             <motion.path
               d="M5 10 C40 0, 80 20, 120 10 C160 0, 195 20, 195 10"
               fill="transparent"
-              stroke="#fb7185"
+              stroke="currentColor"
               strokeWidth={1.8}
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -58,7 +70,12 @@ export default function ConfirmSection() {
           </motion.svg>
         </motion.div>
 
-        <p className="text-slate-700 leading-relaxed mb-10">
+        <p
+          className="
+          leading-relaxed mb-10
+          text-text
+        "
+        >
           Mười năm không phải lúc nào cũng có lần thứ hai.
           <br />
           Tụi mình rất mong có sự hiện diện của bạn.
@@ -73,20 +90,27 @@ export default function ConfirmSection() {
           className="
             inline-flex items-center justify-center gap-2
             rounded-full
-            bg-white text-black
+            bg-accent
+            text-white
             px-8 py-3
             font-medium
             transition
+            shadow-lg shadow-[color:var(--color-accent)/0.25]
           "
         >
           Xác nhận tại đây
           <span className="text-lg">→</span>
         </motion.a>
 
-        <p className="mt-8 text-sm text-slate-600">
+        <p
+          className="
+          mt-8 text-sm
+        "
+        >
           ⏰ Ngày chốt danh sách:{" "}
-          <span className=" text-slate-700 font-bold">Chủ Nhật 01/02</span>
+          <span className="font-bold text-text">Chủ Nhật 01/02</span>
         </p>
+
         <Footer />
       </motion.div>
     </section>

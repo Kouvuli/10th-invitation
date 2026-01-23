@@ -20,48 +20,53 @@ function Hero3D(): JSX.Element {
 
 export default function HeroSection(): JSX.Element {
   const handleClick = () => {
-    const next = document.querySelector("#timeline");
-    next?.scrollIntoView({ behavior: "smooth" });
+    document.querySelector("#timeline")?.scrollIntoView({
+      behavior: "smooth",
+    });
   };
 
   return (
-    <section className="h-screen grid grid-cols-1 md:grid-cols-2">
+    <section className="h-screen grid grid-cols-1 md:grid-cols-2 text-text transition-colors duration-500">
+      {/* ===== LEFT CONTENT ===== */}
       <div className="flex items-center justify-center p-10">
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 42 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
+          transition={{ duration: 1, ease: "easeOut" }}
           className="max-w-xl"
         >
+          {/* TITLE */}
           <motion.div
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9 }}
+            transition={{ duration: 0.8 }}
             className="mb-6"
           >
             <motion.h1
-              className="text-6xl md:text-8xl font-extrabold tracking-widest text-slate-900 leading-tight"
+              className="font-extrabold tracking-widest leading-tight"
               whileHover={{ scale: 1.02 }}
             >
-              <span className="block text-4xl md:text-6xl font-medium text-rose-600">
+              <span className="block text-4xl md:text-6xl font-medium text-accent">
                 CT1619
               </span>
-              <span className="block text-3xl md:text-5xl text-slate-800">
+
+              <span className="block text-3xl md:text-5xl text-text">
                 10 Năm Thanh Xuân
               </span>
             </motion.h1>
 
+            {/* underline */}
             <motion.svg
               viewBox="0 0 200 20"
-              className="w-56 h-10 mt-4 text-rose-400"
+              className="w-56 h-10 mt-4 text-accent"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.2 }}
+              transition={{ delay: 0.25 }}
             >
               <motion.path
                 d="M5 10 C40 0, 80 20, 120 10 C160 0, 195 20, 195 10"
                 fill="transparent"
-                stroke="#fb7185"
+                stroke="currentColor"
                 strokeWidth={1.8}
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -71,21 +76,26 @@ export default function HeroSection(): JSX.Element {
               />
             </motion.svg>
           </motion.div>
-          <p className="text-slate-700 leading-relaxed">
+
+          {/* DESCRIPTION */}
+          <p className="leading-relaxed text-text">
             Năm nay đánh dấu cột mốc{" "}
-            <motion.a
+            <motion.span
               onClick={handleClick}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="cursor-pointer inline-block font-semibold text-rose-600 decoration-rose-300/70 transition hover:decoration-rose-500"
+              className="inline-block cursor-pointer font-semibold text-accent"
             >
               1 thập kỷ
-            </motion.a>{" "}
-            chúng ta đồng hành cùng nhau. Giữa guồng quay cuộc sống, giữ được
-            một tập thể gắn kết suốt 10 năm là điều vô cùng đáng trân trọng.
+            </motion.span>{" "}
+            chúng ta đồng hành cùng nhau. Giữa guồng quay cuộc sống, việc giữ
+            được một tập thể gắn kết suốt 10 năm là điều vô cùng đáng trân
+            trọng.
           </p>
         </motion.div>
       </div>
+
+      {/* ===== RIGHT 3D ===== */}
       <div className="hidden md:block">
         <Hero3D />
       </div>

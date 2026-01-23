@@ -11,7 +11,7 @@ type Item = {
 /* ================= CONFIG ================= */
 
 const LINE_DURATION = 1.5;
-const BOTTOM_OFFSET = 1.8; // sync với line dưới
+const BOTTOM_OFFSET = 1.8;
 
 const getDelay = (index: number, total: number, offset = 0) =>
   offset + (index / (total - 1)) * LINE_DURATION;
@@ -19,16 +19,10 @@ const getDelay = (index: number, total: number, offset = 0) =>
 /* ================= VARIANTS ================= */
 
 const timelineItem = {
-  hidden: {
-    opacity: 0,
-  },
+  hidden: { opacity: 0 },
   show: (delay: number) => ({
     opacity: 1,
-    transition: {
-      delay,
-      duration: 0.2,
-      ease: "easeOut",
-    },
+    transition: { delay, duration: 0.2, ease: "easeOut" },
   }),
 };
 
@@ -64,14 +58,19 @@ export default function TimelineSection(): JSX.Element {
   }));
 
   const topItems = items.slice(0, 5);
-  const bottomItems = items.slice(5, 10);
-
+  const bottomItems = items.slice(5);
   const [open, setOpen] = useState<number | null>(null);
 
   return (
     <section
       id="timeline"
-      className="relative px-14 md:px-28 flex flex-col min-h-screen justify-center items-center"
+      className="
+        relative min-h-screen
+        px-14 md:px-28
+        flex flex-col items-center justify-center
+       text-text
+        transition-colors duration-500
+      "
     >
       {/* ===== TITLE ===== */}
       <motion.div
@@ -79,20 +78,20 @@ export default function TimelineSection(): JSX.Element {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.9 }}
-        className="mb-5 text-center"
+        className="mb-6 text-center"
       >
         <motion.h1
-          className="text-4xl md:text-6xl font-extrabold tracking-widest text-slate-900 leading-tight"
+          className="font-extrabold tracking-widest leading-tight"
           whileHover={{ scale: 1.02 }}
         >
-          <span className="block text-3xl md:text-5xl text-slate-800">
+          <span className="block text-3xl md:text-5xl text-text">
             1 Thập Kỷ
           </span>
         </motion.h1>
 
         <motion.svg
           viewBox="0 0 200 20"
-          className="w-56 h-10 mt-2 text-rose-400 mx-auto"
+          className="md:w-56 md:h-10 w-32 h-8 my-2 mx-auto text-accent"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2 }}
@@ -100,7 +99,7 @@ export default function TimelineSection(): JSX.Element {
           <motion.path
             d="M5 10 C40 0, 80 20, 120 10 C160 0, 195 20, 195 10"
             fill="transparent"
-            stroke="#fb7185"
+            stroke="currentColor"
             strokeWidth={1.8}
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -112,9 +111,8 @@ export default function TimelineSection(): JSX.Element {
       </motion.div>
 
       <div className="w-full max-w-7xl relative">
-        {/* ================= TOP ROW (2016 → 2020) ================= */}
+        {/* ================= TOP ROW ================= */}
 
-        {/* IMAGES */}
         <div className="grid grid-cols-5 gap-3 mb-6">
           {topItems.map((it, index) => {
             const delay = getDelay(index, topItems.length);
@@ -130,9 +128,14 @@ export default function TimelineSection(): JSX.Element {
                 className="flex flex-col items-center"
               >
                 <motion.div
-                  className="w-28 h-16 md:w-44 md:h-28 rounded-lg overflow-hidden shadow-md cursor-pointer"
                   onClick={() => setOpen(it.id)}
                   whileHover={{ scale: 1.05 }}
+                  className="
+                    w-28 h-16 md:w-44 md:h-28
+                    rounded-lg overflow-hidden
+                    shadow-md cursor-pointer
+                    bg-base
+                  "
                 >
                   <img
                     src={`/images/checkpoint-${it.id}.jpg`}
@@ -152,7 +155,10 @@ export default function TimelineSection(): JSX.Element {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
-            className="absolute left-0 right-0 top-1 h-1 bg-rose-400 origin-left rounded-full"
+            className="
+              absolute inset-x-0 top-1 h-0.5
+              bg-accent origin-left rounded-full
+            "
           />
 
           <div className="grid grid-cols-5">
@@ -169,8 +175,8 @@ export default function TimelineSection(): JSX.Element {
                   viewport={{ once: true }}
                   className="flex flex-col items-center"
                 >
-                  <div className="relative z-10 w-3 h-3 bg-rose-600 rounded-full" />
-                  <div className="mt-3 text-sm font-semibold text-rose-600">
+                  <div className="w-3 h-3 rounded-full bg-accent" />
+                  <div className="mt-3 text-sm font-semibold text-accent">
                     {startYear + it.id - 1}
                   </div>
                 </motion.div>
@@ -179,9 +185,8 @@ export default function TimelineSection(): JSX.Element {
           </div>
         </div>
 
-        {/* ================= BOTTOM ROW (2021 → 2025) ================= */}
+        {/* ================= BOTTOM ROW ================= */}
 
-        {/* IMAGES */}
         <div className="grid grid-cols-5 gap-3 mb-6">
           {bottomItems.map((it, index) => {
             const delay = getDelay(index, bottomItems.length, BOTTOM_OFFSET);
@@ -197,9 +202,14 @@ export default function TimelineSection(): JSX.Element {
                 className="flex flex-col items-center"
               >
                 <motion.div
-                  className="w-28 h-16 md:w-44 md:h-28 rounded-lg overflow-hidden shadow-md cursor-pointer"
                   onClick={() => setOpen(it.id)}
                   whileHover={{ scale: 1.05 }}
+                  className="
+                    w-28 h-16 md:w-44 md:h-28
+                    rounded-lg overflow-hidden
+                    shadow-md cursor-pointer
+                    bg-base
+                  "
                 >
                   <img
                     src={`/images/checkpoint-${it.id}.jpg`}
@@ -212,14 +222,16 @@ export default function TimelineSection(): JSX.Element {
           })}
         </div>
 
-        {/* LINE + DOT + YEAR */}
         <div className="relative h-20 mb-10">
           <motion.div
             variants={lineBottom}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
-            className="absolute left-0 right-0 top-1 h-1 bg-rose-400 origin-left rounded-full"
+            className="
+              absolute inset-x-0 top-1 h-0.5
+              bg-accent origin-left rounded-full
+            "
           />
 
           <div className="grid grid-cols-5">
@@ -236,8 +248,8 @@ export default function TimelineSection(): JSX.Element {
                   viewport={{ once: true }}
                   className="flex flex-col items-center"
                 >
-                  <div className="relative z-10 w-3 h-3 bg-rose-600 rounded-full" />
-                  <div className="mt-3 text-sm font-semibold text-rose-600">
+                  <div className="w-3 h-3 rounded-full bg-accent" />
+                  <div className="mt-3 text-sm font-semibold text-accent">
                     {startYear + it.id - 1}
                   </div>
                 </motion.div>
@@ -259,10 +271,15 @@ export default function TimelineSection(): JSX.Element {
             className="max-w-2xl w-full mx-4"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="relative rounded-xl overflow-hidden shadow-2xl bg-white">
+            <div className="relative rounded-xl overflow-hidden shadow-2xl bg-base">
               <button
                 onClick={() => setOpen(null)}
-                className="absolute top-3 right-3 z-50 bg-white rounded-full p-2 shadow cursor-pointer"
+                className="
+                  absolute top-3 right-3
+                  rounded-full p-2 shadow
+                  bg-base text-text
+                  cursor-pointer
+                "
               >
                 ✕
               </button>

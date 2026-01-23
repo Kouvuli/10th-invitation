@@ -1,0 +1,15 @@
+@theme {
+  --color-base: #f3e0b4;
+  --color-text: #0f172a;
+  --color-muted: #475569;
+  --color-accent: #f34a66;
+  --color-base-light: #fcf7ea;
+}
+
+html.dark {
+  --color-base: #011f45;
+  --color-text: #e5e7eb;
+  --color-muted: #94a3b8;
+  --color-accent: #fa284b;
+  --color-base-light: rgb(6, 64, 101);
+}
