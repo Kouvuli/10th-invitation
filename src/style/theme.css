@@ -1,9 +1,9 @@
 @theme {
-  --color-base: #f3e0b4;
+  --color-base: #f0f3f7;
   --color-text: #0f172a;
   --color-muted: #475569;
   --color-accent: #f34a66;
-  --color-base-light: #fcf7ea;
+  --color-base-light: #fdf2c8;
 }
 
 html.dark {
