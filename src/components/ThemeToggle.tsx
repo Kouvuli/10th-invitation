@@ -32,7 +32,7 @@ export default function ThemeToggle() {
         borderColor: isDark ? "rgba(255,255,255,0.15)" : "rgba(15,23,42,0.12)",
       }}
       transition={{ duration: 0.35, ease: "easeOut" }}
-      className="cursor-pointer fixed top-6 right-6 z-50 w-25 h-12.5 rounded-full flex items-center px-1.5 backdrop-blur-md border"
+      className="cursor-pointer fixed top-6 right-8 z-50 w-25 h-12.5 rounded-full flex items-center px-1.5 backdrop-blur-md border"
       aria-label="Toggle theme"
     >
       {/* ☀️ */}
